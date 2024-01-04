@@ -4,8 +4,6 @@ This is an example plugin for the [Fictioneer](https://github.com/Tetrakern/fict
 
 ## Functions
 
-Explanations for the pre-made functions in the plugin.
-
 ### `fcnbp_make_plugin_meta_protected( $protected, $meta_key )`
 
 Hooked into `is_protected_meta`, this function prevents meta fields from being changed in the editor. The interface is disabled in Fictioneer by default, but that does not mean a tech-savvy user cannot get around it. The function checks whether a meta key starts with a certain prefix (`fcnbp_` for the example) and protects it from such manipulation. Alternatively, you can start your meta keys with an underscore (e.g. `_my_meta_field`) to achieve the same without the need for this function.
