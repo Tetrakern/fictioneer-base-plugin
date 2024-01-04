@@ -1,8 +1,8 @@
 # Fictioneer Base Plugin
 
-This is an example plugin for the [Fictioneer](https://github.com/Tetrakern/fictioneer) WordPress theme to work off. Do not forget to change any names, prefixes, constants, and the text domain to your own.
+This is an example plugin for the [Fictioneer](https://github.com/Tetrakern/fictioneer) WordPress theme to work off. It works exactly as any other plugin, just with some ready-made functions to properly link it to the theme. Do not forget to change any names, prefixes, constants, and the text domain.
 
-## Functions
+## Ready-Made Functions
 
 ### `fcnbp_make_plugin_meta_protected( $protected, $meta_key )`
 
