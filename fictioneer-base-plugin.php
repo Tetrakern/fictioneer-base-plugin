@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fictioneer Base Plugin
  * Description: Example plugin for developers.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 6.1.0
  * Requires PHP: 7.4.0
  * Author: Tetrakern
@@ -14,7 +14,7 @@
 defined( 'ABSPATH' ) OR exit;
 
 // Version
-define( 'FCNBP_VERSION', '1.0.0' );
+define( 'FCNBP_VERSION', '1.0.1' );
 
 // Text domain
 define( 'FCNBP_TD', 'fcnbp' );
@@ -54,6 +54,7 @@ add_filter( 'is_protected_meta', 'fcnbp_make_plugin_meta_protected', 10, 2 );
  * active to avoid errors.
  *
  * @since 1.0.0
+ * @since 1.0.1 - Ensure deactivate_plugins() is defined.
  */
 
 function fcnbp_check_theme() {
@@ -69,6 +70,8 @@ function fcnbp_check_theme() {
 
   // Theme name must be Fictioneer!
   if ( $theme_name !== 'Fictioneer' ) {
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
     // Deactivate plugin
     deactivate_plugins( plugin_basename( __FILE__ ) );
 
