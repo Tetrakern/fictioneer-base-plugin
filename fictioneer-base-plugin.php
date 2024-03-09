@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fictioneer Base Plugin
  * Description: Example plugin for developers.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.1.0
  * Requires PHP: 7.4.0
  * Author: Tetrakern
@@ -14,7 +14,7 @@
 defined( 'ABSPATH' ) OR exit;
 
 // Version
-define( 'FCNBP_VERSION', '1.0.1' );
+define( 'FCNBP_VERSION', '1.0.2' );
 
 // Text domain
 define( 'FCNBP_TD', 'fcnbp' );
@@ -134,12 +134,36 @@ add_action( 'fictioneer_admin_settings_plugins', 'fcnbp_settings_card' );
 // =======================================================================================
 
 /**
+ * Compare installed WordPress version against version string
+ *
+ * @since 1.0.2
+ * @global wpdb $wp_version  Current WordPress version string.
+ *
+ * @param string $version   The version string to test against.
+ * @param string $operator  Optional. How to compare. Default '>='.
+ *
+ * @return boolean True or false.
+ */
+
+function fcnbp_compare_wp_version( $version, $operator = '>=' ) {
+  global $wp_version;
+
+  return version_compare( $wp_version, $version, $operator );
+}
+
+/**
  * Enqueues styles and scripts on the frontend
  *
  * @since 1.0.0
+ * @since 1.0.2 - Added $strategy and $dependency.
  */
 
 function fcnbp_enqueue_frontend_scripts() {
+  // Setup
+  // $strategy = fcnbp_compare_wp_version( '6.3' ) ? array( 'strategy'  => 'defer' ) : true; // Defer or load in footer
+  // $dependency = get_option( 'fictioneer_bundle_scripts' ) ?
+  //   ['fictioneer-complete-scripts'] : ['fictioneer-application-scripts'];
+
   // Styles
   // wp_enqueue_style(
   //   'fictioneer-base-plugin-styles',
@@ -152,9 +176,9 @@ function fcnbp_enqueue_frontend_scripts() {
   // wp_enqueue_script(
   //   'fictioneer-base-plugin-scripts',
   //   plugin_dir_url( __FILE__ ) . 'js/fictioneer-base-plugin.js',
-  //   ['fictioneer-application-scripts'],
+  //   [], // Or use $dependency if you need it
   //   FCNBP_VERSION,
-  //   true
+  //   $strategy
   // );
 }
 add_action( 'wp_enqueue_scripts', 'fcnbp_enqueue_frontend_scripts' );
